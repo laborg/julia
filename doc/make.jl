@@ -7,7 +7,7 @@ pushfirst!(DEPOT_PATH, joinpath(@__DIR__, "deps"))
 using Pkg
 Pkg.instantiate()
 
-using Documenter, DocumenterLaTeX
+using Documenter, DocumenterLaTeX, DocumenterMarkdown
 
 baremodule GenStdLib end
 
@@ -44,6 +44,7 @@ end
 
 # Check if we are building a PDF
 const render_pdf = "pdf" in ARGS
+const render_md = "md" in ARGS
 
 # Generate a suitable markdown file from NEWS.md and put it in src
 str = read(joinpath(@__DIR__, "..", "NEWS.md"), String)
@@ -151,7 +152,7 @@ DevDocs = [
 ]
 
 
-if render_pdf
+if render_pdf || render_md
 const PAGES = [
     "Manual" => ["index.md", Manual...],
     "Base" => BaseDocs,
@@ -190,8 +191,11 @@ end
 
 const format = if render_pdf
     LaTeX(
-        platform = "texplatform=docker" in ARGS ? "docker" : "native"
+        platform = "none"
+        # platform = "texplatform=docker" in ARGS ? "docker" : "native"
     )
+elseif render_md
+    DocumenterMarkdown.Markdown()
 else
     Documenter.HTML(
         prettyurls = ("deploy" in ARGS),
@@ -207,7 +211,7 @@ else
 end
 
 makedocs(
-    build     = joinpath(buildroot, "doc", "_build", (render_pdf ? "pdf" : "html"), "en"),
+    build     = joinpath(buildroot, "doc", "_build", (render_pdf ? "pdf" : render_md ? "md" : "html"), "en"),
     modules   = [Base, Core, [Base.root_module(Base, stdlib.stdlib) for stdlib in STDLIB_DOCS]...],
     clean     = true,
     doctest   = ("doctest=fix" in ARGS) ? (:fix) : ("doctest=only" in ARGS) ? (:only) : ("doctest=true" in ARGS) ? true : false,

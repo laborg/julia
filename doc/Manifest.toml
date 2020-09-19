@@ -29,6 +29,12 @@ git-tree-sha1 = "653299370be20ff580bccd707dc9f360c0852d7f"
 uuid = "cd674d7a-5f81-5cf3-af33-235ef1834b99"
 version = "0.2.0"
 
+[[DocumenterMarkdown]]
+deps = ["Documenter", "Test"]
+git-tree-sha1 = "c302ba512683c3db462ee4eff718ae6fedcbf380"
+uuid = "997ab1e6-3595-5248-9280-8efb232c3433"
+version = "0.2.0"
+
 [[InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
@@ -63,7 +69,7 @@ uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
 version = "1.0.10"
 
 [[Pkg]]
-deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
+deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "TOML", "UUIDs"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 
 [[Printf]]
@@ -86,6 +92,10 @@ uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
 [[Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
+
+[[TOML]]
+deps = ["Dates"]
+uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]
